@@ -94,3 +94,33 @@ All CTAs link to: `https://t.me/modern_estate_agency_ukraine`
 
 Update this URL in `src/pages/index.astro` if needed.
 
+## 🚀 Deployment on GitHub Pages
+
+The site is configured to deploy automatically to GitHub Pages.
+
+### Setup Instructions:
+
+1. **Enable GitHub Pages:**
+   - Go to your repository settings on GitHub: `https://github.com/Dezmoraalb/modern-estate-agency/settings/pages`
+   - Under "Source", select **"GitHub Actions"** (not "Deploy from a branch")
+
+2. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Configure GitHub Pages deployment"
+   git push origin main
+   ```
+
+3. **Automatic Deployment:**
+   - The GitHub Actions workflow will automatically build and deploy your site
+   - Check the "Actions" tab to see the deployment progress
+   - Once complete, your site will be available at:
+     `https://dezmoraalb.github.io/modern-estate-agency`
+
+### Manual Deployment:
+
+If you need to deploy manually:
+```bash
+npm run build
+# Then push the dist/ folder to gh-pages branch or use GitHub Actions
+```

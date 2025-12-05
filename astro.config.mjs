@@ -4,6 +4,8 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://dezmoraalb.github.io',
+  base: '/modern-estate-agency',
   integrations: [tailwind(), react()],
 });
 
