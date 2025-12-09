@@ -1,62 +1,85 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import MagneticButton from '../components/MagneticButton';
+import StaggeredText from '../components/StaggeredText';
+import PhoneShowcase from '../components/PhoneShowcase';
+import BentoCard from '../components/BentoCard';
+import InstagramMarquee from '../components/InstagramMarquee';
 
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Modern Estate Agency | Закритий клуб нерухомості">
   
-  <!-- Grain Texture Overlay -->
-  <div class="fixed inset-0 z-[100] pointer-events-none opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjYSkiIG9wYWNpdHk9Ii41Ii8+PC9zdmc+'); background-size: 200px 200px;"></div>
-
-  <!-- Ambient Particles -->
   <div id="particles-container" class="fixed inset-0 z-[1] pointer-events-none"></div>
 
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/80 md:bg-black/40 backdrop-blur-xl md:backdrop-blur-md border-b border-white/5">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      <img src={`${baseUrl}assets/modern-estate-agency-logo.jpg`} alt="Logo" class="h-8 md:h-12 w-auto opacity-90 brightness-110" />
-      <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="group relative px-5 py-2 md:px-8 md:py-3 overflow-hidden rounded-full bg-white/5 border border-white/20 text-white transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-        <div class="absolute inset-0 w-0 bg-white/10 transition-all duration-[400ms] ease-out group-hover:w-full"></div>
-        <span class="relative text-[10px] md:text-xs font-bold tracking-widest uppercase text-white group-hover:text-white transition-colors">Приєднатися</span>
-      </a>
+      <img src={`${baseUrl}assets/modern-estate-agency-logo.jpg`} alt="Logo" class="h-12 md:h-16 w-auto opacity-90 brightness-110" />
+      <div class="flex items-center gap-4 md:gap-6">
+        <a href="tel:0970977774" class="text-white text-sm md:text-base font-light hover:text-white/80 transition-colors">
+          097 097 77 74
+        </a>
+        <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="group relative px-5 py-2 md:px-8 md:py-3 overflow-hidden rounded-full bg-white/5 border border-white/20 text-white transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+          <div class="absolute inset-0 w-0 bg-white/10 transition-all duration-[400ms] ease-out group-hover:w-full"></div>
+          <span class="relative text-[10px] md:text-xs font-bold tracking-widest uppercase text-white group-hover:text-white transition-colors">Приєднатися</span>
+        </a>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section with Video Background -->
   <section id="hero-section" class="relative min-h-[100dvh] w-full flex flex-col justify-center md:justify-end pb-12 md:pb-32 overflow-hidden z-10">
-    <!-- Video Background -->
     <video id="hero-video" autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0 scale-110 opacity-100 pointer-events-none">
       <source src={`${baseUrl}assets/city-night-drone.mp4`} type="video/mp4" />
     </video>
-    <div id="hero-blur" class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/80 via-black/50 to-transparent z-[5] pointer-events-none"></div>
-    <div class="relative z-20 container mx-auto px-6 fade-in-section mt-20 md:mt-0">
+    <div class="absolute inset-0 z-[4] pointer-events-none" style="background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.8) 100%);"></div>
+    <div id="hero-blur" class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/90 via-black/60 to-transparent z-[5] pointer-events-none"></div>
+    
+    <div class="relative z-20 container mx-auto px-6 fade-in-section pt-24 md:pt-28">
         <div class="max-w-5xl">
-          <div class="inline-flex items-center gap-3 mb-4 md:mb-6 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md reveal-text" style="animation-delay: 0.2s">
+          <div class="inline-flex items-center gap-3 mb-4 md:mb-6 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
             <span class="w-2 h-2 rounded-full bg-white/60 animate-pulse"></span>
             <span class="text-white/80 text-xs font-bold tracking-widest uppercase">Modern Estate Agency</span>
           </div>
           
-          <h1 class="font-display text-4xl xs:text-5xl md:text-7xl lg:text-9xl font-bold text-white leading-[1.1] md:leading-[0.9] mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-            <span class="reveal-text inline-block" style="animation-delay: 0.3s">Нерухомість</span><br />
-            <span class="reveal-text inline-block bg-clip-text text-transparent bg-[linear-gradient(110deg,#e1cda6,45%,#ffffff,55%,#e1cda6)] bg-[length:250%_100%] animate-shimmer-text italic pr-4 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style="animation-delay: 0.5s">Закритого</span><br />
-            <span class="reveal-text inline-block" style="animation-delay: 0.7s">Формату.</span>
+          <h1 class="flex flex-col font-display font-bold text-white mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+  
+            <span class="block leading-[0.9] md:leading-[0.85] reveal-text" style="animation-delay: 0.1s;">
+              Нерухомість
+            </span>
+            
+            <span class="block leading-[0.9] md:leading-[0.85] reveal-text" style="animation-delay: 0.3s;">
+              <span class="bg-clip-text text-transparent bg-[linear-gradient(110deg,#e1cda6,45%,#ffffff,55%,#e1cda6)] bg-[length:250%_100%] animate-shimmer-text italic pr-4 pb-1 relative z-10">
+                Закритого
+              </span>
+            </span>
+            
+            <span class="block leading-[0.9] md:leading-[0.85] reveal-text" style="animation-delay: 0.5s;">
+              Формату.
+            </span>
+          
           </h1>
           
-          <p class="text-white text-base md:text-2xl font-light leading-relaxed mb-8 md:mb-12 pl-4 border-l-2 border-white/40 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] reveal-text" style="animation-delay: 0.9s">
-             База об'єктів, які ніколи не потраплять на OLX.<br class="hidden md:block">
-             Доступ тільки за запрошенням.
+          <p class="text-white text-base md:text-2xl font-light leading-relaxed mb-8 md:mb-12 pl-4 border-l-2 border-white/40 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+             База обʼєктів нерухомості агенції
           </p>
           
-          <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 group cursor-pointer reveal-text" style="animation-delay: 1.1s">
-            <div class="w-full md:w-auto h-14 md:h-16 px-8 flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/20 rounded-sm text-[#40a7e3] font-bold tracking-widest uppercase hover:bg-white/10 hover:border-[#40a7e3]/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(64,167,227,0.3)] active:scale-95">
-              ВІДКРИТИ КАТАЛОГ
-            </div>
-            <span class="text-white/50 text-xs md:text-sm font-light group-hover:text-white transition-colors">Безкоштовний доступ <br>сьогодні</span>
-          </a>
+          <div class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+            <MagneticButton 
+              client:load
+              href="https://t.me/modern_estate_agency_ukraine" 
+              target="_blank"
+              className="w-full md:w-auto"
+            >
+              <div class="h-14 md:h-16 px-8 flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/20 rounded-sm text-[#40a7e3] font-bold tracking-widest uppercase hover:bg-white/10 hover:border-[#40a7e3]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(64,167,227,0.3)]">
+                ВІДКРИТИ КАТАЛОГ
+              </div>
+            </MagneticButton>
+            <span class="text-white/50 text-xs md:text-sm font-light">Підпишіться та слідкуйте за оновленнями !</span>
+          </div>
         </div>
     </div>
     
-    <!-- Separator at the end of Hero section -->
     <div class="h-px w-full bg-gradient-to-r from-transparent via-white/30 to-transparent absolute bottom-0 left-0"></div>
   </section>
 
@@ -69,7 +92,7 @@ const baseUrl = import.meta.env.BASE_URL;
         <div class="lg:w-1/2 fade-in-section">
           <h2 class="font-display text-4xl md:text-6xl text-white mb-10 leading-tight">
             Інсайд <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/60">Ринку Києва</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/60">ринку Київської області та Києва</span>
           </h2>
           
           <div class="space-y-12">
@@ -80,7 +103,7 @@ const baseUrl = import.meta.env.BASE_URL;
                </div>
                <div>
                   <h3 class="text-2xl text-white font-medium mb-3">Ви бачите це першими</h3>
-                  <p class="text-gray-400 font-light leading-relaxed text-lg">Коли об'єкт з'являється на ріелторських сайтах — він вже проданий. У нашому каналі ви отримуєте сповіщення миттєво.</p>
+                  <p class="text-gray-400 font-light leading-relaxed text-lg">Публікуємо лише актуальні пропозиції з дійсними цінами та описом</p>
                </div>
             </div>
 
@@ -90,56 +113,83 @@ const baseUrl = import.meta.env.BASE_URL;
                </div>
                <div>
                   <h3 class="text-2xl text-white font-medium mb-3">Чесна ціна</h3>
-                  <p class="text-gray-400 font-light leading-relaxed text-lg">Без накруток посередників. Прямий контакт та реальна ринкова вартість об'єктів.</p>
+                  <p class="text-gray-400 font-light leading-relaxed text-lg">Без комісії та відсотків! Працюємо напряму від власників та забудовників! Прямий контакт та реальна ринкова вартість.</p>
                </div>
             </div>
           </div>
         </div>
 
-        <!-- Phone Mockup with Titanium Frame -->
-        <div class="lg:w-1/2 flex justify-center lg:justify-end fade-in-section">
-          <div id="phone-container" class="relative w-[290px] h-[580px] md:w-[340px] md:h-[680px] rounded-[3rem] md:rounded-[3.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] animate-float transition-all duration-500 mx-auto" style="transform-style: preserve-3d;">
-            
-            <div class="absolute inset-0 rounded-[3rem] md:rounded-[3.5rem] bg-gradient-to-b from-[#4a4a4a] via-[#2a2a2a] to-[#1a1a1a] p-[1px]">
-                <div class="absolute inset-[1px] rounded-[2.9rem] md:rounded-[3.4rem] bg-[#000] border-[4px] border-[#1a1a1a] shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] overflow-hidden">
-                    
-                    <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-full z-50 flex items-center justify-center gap-2">
-                        <div class="w-2 h-2 rounded-full bg-[#1a1a1a]"></div>
-                    </div>
+        <PhoneShowcase client:load baseUrl={baseUrl} />
 
-                    <!-- Notification Badge -->
-                    <div id="notification-badge" class="absolute top-12 right-8 z-50 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.5)]">3</div>
-                    
-                    <div class="w-full h-full bg-[#0e1621] overflow-hidden relative">
-                        <div class="w-full h-full relative">
-                            <div id="telegram-scroll" class="w-full animate-scroll flex flex-col">
-                                <img src={`${baseUrl}assets/message-from-channell.jpg`} class="w-full block" alt="Post 1" />
-                                <img src={`${baseUrl}assets/message-from-channell_2.jpg`} class="w-full block" alt="Post 2" />
-                                <img src={`${baseUrl}assets/message-from-channell_3.jpg`} class="w-full block" alt="Post 3" />
-                                <img src={`${baseUrl}assets/message-from-channell_4.jpg`} class="w-full block" alt="Post 4" />
-                                
-                                <img src={`${baseUrl}assets/message-from-channell.jpg`} class="w-full block" alt="Post 1 Dup" />
-                                <img src={`${baseUrl}assets/message-from-channell_2.jpg`} class="w-full block" alt="Post 2 Dup" />
-                                <img src={`${baseUrl}assets/message-from-channell_3.jpg`} class="w-full block" alt="Post 3 Dup" />
-                                <img src={`${baseUrl}assets/message-from-channell_4.jpg`} class="w-full block" alt="Post 4 Dup" />
-                            </div>
-                        </div>
-                        
-                        <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0e1621] to-transparent z-10 pointer-events-none"></div>
-                        <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#0e1621] via-[#0e1621] to-transparent z-10 pointer-events-none"></div>
+      </div>
+    </div>
+  </section>
 
-                        <div class="absolute bottom-8 left-0 w-full px-6 z-50">
-                            <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="relative block group w-full py-4 bg-[#2AABEE] text-white text-center font-bold rounded-xl shadow-[0_10px_40px_-10px_rgba(42,171,238,0.5)] overflow-hidden hover:bg-[#3395cc] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                                ПІДПИСАТИСЯ
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
+  <section class="py-20 md:py-32 bg-black relative overflow-hidden border-t border-white/5">
+    <div class="absolute inset-0 opacity-20 mix-blend-overlay" style={`background-image: url('${baseUrl}assets/black-marble-texture.jpg'); background-size: cover;`}></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <h2 class="font-display text-4xl md:text-6xl text-white mb-12 md:mb-16 text-center">
+        Послуги
+      </h2>
+      
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          
+          <BentoCard client:load description="індивідуальний пошук нерухомості за запитом (придбання/ оренда);">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </BentoCard>
+
+          <BentoCard client:load description="робота з усіма державними програмами («Єоселя», «Євідновлення», постанови );" span="2">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </BentoCard>
+
+          <BentoCard client:load description="офлайн та онлайн презентації обʼєктів;">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </BentoCard>
+
+          <BentoCard client:load description="юридичний та нотаріальний супровід;">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </BentoCard>
+
+          <BentoCard client:load description="співпраця з дизайнерами та ремонтними компаніями;">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+            </svg>
+          </BentoCard>
+
+          <BentoCard client:load description="приємні бонуси у вигляді сертифікатів на безкоштовну охорону, інтерент та інше;" span="2">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <polyline points="20 12 20 22 4 22 4 12"></polyline>
+              <rect x="2" y="7" width="20" height="5"></rect>
+              <line x1="12" y1="22" x2="12" y2="7"></line>
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+            </svg>
+          </BentoCard>
+
+          <BentoCard client:load description="підготовка обʼєктів до продажу та допомога в реалізації обʼєктів.">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </BentoCard>
+
         </div>
-
       </div>
     </div>
   </section>
@@ -151,11 +201,11 @@ const baseUrl = import.meta.env.BASE_URL;
         
         <div class="flex flex-col md:flex-row items-center md:items-end justify-between mb-12 md:mb-16 gap-8 fade-in-section text-center md:text-left">
             <div class="w-full md:w-auto">
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
+                 <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
                     <div class="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
                         <img src={`${baseUrl}assets/modern-estate-agency-logo.jpg`} alt="Profile" class="w-full h-full rounded-full border-2 border-black object-cover" />
                     </div>
-                    <div class="text-left">
+                     <div class="text-left">
                         <h3 class="text-white font-bold text-lg leading-none">modern_estate_agency</h3>
                         <p class="text-gray-500 text-xs mt-1">Київ | Ірпінь | Буча</p>
                     </div>
@@ -163,60 +213,34 @@ const baseUrl = import.meta.env.BASE_URL;
                 
                 <h2 class="font-display text-4xl md:text-6xl text-white leading-tight">
                     Більше ніж <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f09433] via-[#bc1888] to-[#bf953f] italic">Агенція</span>
+                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f09433] via-[#bc1888] to-[#bf953f] italic">Агенція</span>
                 </h2>
             </div>
 
             <div class="flex items-center gap-6 md:gap-8 py-3 px-6 md:py-4 md:px-8 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
                 <div class="text-center">
-                    <div class="text-xl md:text-2xl font-display text-white">9,6k+</div>
+                   <div class="text-xl md:text-2xl font-display text-white">9,6k+</div>
                     <div class="text-[10px] uppercase tracking-widest text-gray-400">Підписників</div>
                 </div>
                 <div class="w-px h-8 bg-white/10"></div>
                 <div class="text-center">
-                    <div class="text-xl md:text-2xl font-display text-white">99</div>
+                   <div class="text-xl md:text-2xl font-display text-white">99</div>
                     <div class="text-[10px] uppercase tracking-widest text-gray-400">Публікацій</div>
                 </div>
             </div>
         </div>
       
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          
-          <a href="https://www.instagram.com/p/DM7hr25tY-Y/" target="_blank" class="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer fade-in-section" style="transition-delay: 100ms;">
-              <img src={`${baseUrl}assets/insta-post-1.jpg`} alt="Insta Post" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" class="drop-shadow-lg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                  <span class="text-white font-bold text-sm">342</span>
-              </div>
-              <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </div>
-          </a>
-
-          <a href="https://www.instagram.com/p/DRu_ex4jXG2/" target="_blank" class="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer fade-in-section" style="transition-delay: 200ms;">
-              <img src={`${baseUrl}assets/insta-post-2.jpg`} alt="Insta Post" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" class="drop-shadow-lg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                  <span class="text-white font-bold text-sm">521</span>
-              </div>
-          </a>
-
-          <a href="https://www.instagram.com/p/DLjv6CXNXdK/" target="_blank" class="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer fade-in-section" style="transition-delay: 300ms;">
-              <img src={`${baseUrl}assets/insta-post-3.jpg`} alt="Insta Post" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" class="drop-shadow-lg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                  <span class="text-white font-bold text-sm">890</span>
-              </div>
-          </a>
-
-          <a href="https://www.instagram.com/p/DJ6Wxz3NUP4/" target="_blank" class="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer fade-in-section" style="transition-delay: 400ms;">
-              <img src={`${baseUrl}assets/insta-post-4.jpg`} alt="Insta Post" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" class="drop-shadow-lg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                  <span class="text-white font-bold text-sm">1.2k</span>
-              </div>
-          </a>
-
+      <div class="mb-16 overflow-hidden">
+        <InstagramMarquee 
+          client:load
+          baseUrl={baseUrl}
+          posts={[
+            { href: 'https://www.instagram.com/p/DM7hr25tY-Y/', image: 'insta-post-1.jpg', alt: 'Insta Post 1', likes: '342' },
+            { href: 'https://www.instagram.com/p/DRu_ex4jXG2/', image: 'insta-post-2.jpg', alt: 'Insta Post 2', likes: '521' },
+            { href: 'https://www.instagram.com/p/DLjv6CXNXdK/', image: 'insta-post-3.jpg', alt: 'Insta Post 3', likes: '890' },
+            { href: 'https://www.instagram.com/p/DJ6Wxz3NUP4/', image: 'insta-post-4.jpg', alt: 'Insta Post 4', likes: '1.2k' },
+          ]}
+        />
       </div>
 
       <div class="flex justify-center fade-in-section">
@@ -225,7 +249,7 @@ const baseUrl = import.meta.env.BASE_URL;
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                   Підписатися
               </span>
-              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </a>
       </div>
     </div>
@@ -236,28 +260,53 @@ const baseUrl = import.meta.env.BASE_URL;
         <div class="flex flex-col md:flex-row items-center gap-16">
             <div class="md:w-1/2 relative fade-in-section">
                 <div class="relative overflow-hidden rounded-sm shadow-2xl border border-white/10 group">
-                    <img src={`${baseUrl}assets/ukraine-night-flag.jpg`} alt="Kyiv" class="w-full grayscale group-hover:grayscale-0 transition-all duration-1000" />
+                    <img src={`${baseUrl}assets/ukraine-night-flag.jpg`} alt="Ukraine" class="w-full grayscale group-hover:grayscale-0 transition-all duration-1000" />
                     <div class="absolute inset-0 bg-white/5 mix-blend-overlay"></div>
                 </div>
                 <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-white/20"></div>
-                <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-white/20"></div>
+                 <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-white/20"></div>
             </div>
             
             <div class="md:w-1/2 fade-in-section">
-                <h2 class="font-display text-4xl md:text-5xl text-white mb-8">Київська <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/60">Експертиза</span></h2>
-                <p class="text-gray-400 text-lg font-light leading-relaxed mb-8">
-                    Ми знаємо реальну ціну кожного квадратного метра. Ми не витрачаємо ваш час на перегляди об'єктів з проблемними документами чи завищеною ціною.
-                </p>
-                <div class="flex items-center gap-4">
-                    <div class="h-px flex-1 bg-white/10"></div>
-                    <span class="text-white/60 text-sm uppercase tracking-widest">Since 2021</span>
+                <h2 class="font-display text-4xl md:text-5xl text-white mb-8">Чому <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/60">ми?</span></h2>
+                <div class="space-y-4 mb-8">
+                    <p class="text-gray-300 text-lg font-light leading-relaxed">Працюємо без комісії та % для покупців!</p>
+                    <p class="text-gray-300 text-lg font-light leading-relaxed">Широка база усіх обʼєктів Бучанського регіону, ексклюзивні пропозиції від забудовників та власників!</p>
+                    <p class="text-gray-300 text-lg font-light leading-relaxed">Лише перевірені обʼєкти!</p>
+                   <p class="text-gray-300 text-lg font-light leading-relaxed">Онлайн - офлайн перегляди.</p>
+                    <p class="text-gray-300 text-lg font-light leading-relaxed">Ми цінуємо Ваш час та знайдемо найкращий варіант - безпечно та комфортно!</p>
                 </div>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-px flex-1 bg-white/10"></div>
+                    <span class="text-white/60 text-sm uppercase tracking-widest">Since 2025</span>
+                </div>
+                <a href="tel:0970977774" class="inline-block px-8 py-4 bg-white/5 backdrop-blur-md border border-white/20 rounded-sm text-white font-bold tracking-widest uppercase hover:bg-white/10 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95">
+                   Зателефонувати
+                </a>
             </div>
         </div>
     </div>
   </section>
 
-  <!-- Separator -->
+  <section class="py-20 md:py-32 bg-black relative overflow-hidden border-t border-white/5">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center fade-in-section">
+        <p class="text-white text-lg md:text-xl font-light leading-relaxed mb-8 md:mb-12">
+          Якщо Ви хочете, щоб ми допомогли з продажем Вашої нерухомості, тоді Ви на вірному сайті!
+          Обіцяємо професійний підхід та швидкий результат! За консультацією напишіть нам чи зателефонуйте!
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+          <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-white/5 backdrop-blur-md border border-white/20 rounded-sm text-white font-bold tracking-widest uppercase hover:bg-white/10 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 text-center">
+            Написати нам
+          </a>
+          <a href="tel:0970977774" class="w-full sm:w-auto px-8 py-4 bg-white/5 backdrop-blur-md border border-white/20 rounded-sm text-white font-bold tracking-widest uppercase hover:bg-white/10 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 text-center">
+            Зателефонувати
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="h-px w-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
 
   <footer class="bg-black py-12 md:py-20 relative overflow-hidden">
@@ -267,29 +316,51 @@ const baseUrl = import.meta.env.BASE_URL;
     <div class="container mx-auto px-6 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8 md:mb-12">
         <div class="text-left">
-          <img src={`${baseUrl}assets/modern-estate-agency-logo.jpg`} alt="Modern Estate Agency" class="h-16 w-auto mb-6 opacity-90" />
+          <img src={`${baseUrl}assets/modern-estate-agency-logo.jpg`} alt="Modern Estate Agency" class="h-16 md:h-20 w-auto mb-6 opacity-90" />
           <p class="text-gray-500 text-sm font-light leading-relaxed max-w-xs">
-            Ексклюзивна база преміум нерухомості Києва. Доступ тільки за запрошенням.
+            Ексклюзивна база преміум нерухомості Києва.
+            Доступ тільки за запрошенням.
           </p>
         </div>
         <div>
           <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Контакти</h3>
           <ul class="space-y-2 text-gray-400 text-sm font-light">
             <li>
+              <a href="tel:0970977774" class="hover:text-white transition-colors">
+                097 097 77 74
+              </a>
+            </li>
+            <li class="text-gray-500">Київська область, місто Ірпінь, вулиця Садова 31/32, офіс 32, ТРЦ "Garden Plaza" (3 поверх)</li>
+            <li>
               <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="hover:text-white transition-colors">
                 Telegram канал
               </a>
             </li>
-            <li class="text-gray-500">Київ, Україна</li>
-            <li class="text-gray-500">Since 2021</li>
           </ul>
         </div>
         <div>
-          <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Послуги</h3>
+          <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-widest">Соціальні мережі</h3>
           <ul class="space-y-2 text-gray-400 text-sm font-light">
-            <li>Преміум резиденції</li>
-            <li>Інвестиційна нерухомість</li>
-            <li>Консультації</li>
+            <li>
+               <a href="https://t.me/modern_estate_agency_ukraine" target="_blank" class="hover:text-white transition-colors">
+                Telegram
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UCkbptC4QGmMU6MGiQPzK3Dg" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                 YouTube
+              </a>
+            </li>
+            <li>
+              <a href="https://tiktok.com/@modern_estate" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                TikTok
+              </a>
+             </li>
+            <li>
+              <a href="https://www.facebook.com/profile.php?id=61572273623361" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                Facebook
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -317,9 +388,8 @@ const baseUrl = import.meta.env.BASE_URL;
       };
     });
 
-    // Parallax for Hero Video (без blur)
+    // Parallax for Hero Video
     const heroVideo = document.getElementById('hero-video') as HTMLVideoElement;
-    
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       if (heroVideo) {
@@ -330,7 +400,6 @@ const baseUrl = import.meta.env.BASE_URL;
     // Particles Effect
     const particlesContainer = document.getElementById('particles-container');
     const particleCount = 50;
-
     if (particlesContainer) {
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -345,7 +414,6 @@ const baseUrl = import.meta.env.BASE_URL;
 
     // Magnetic Hover Effect for Cards
     const magneticCards = document.querySelectorAll('.magnetic-card') as NodeListOf<HTMLElement>;
-    
     magneticCards.forEach(card => {
       card.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
@@ -366,31 +434,6 @@ const baseUrl = import.meta.env.BASE_URL;
       });
     });
 
-    // 3D Phone Transform
-    const phoneContainer = document.getElementById('phone-container') as HTMLElement;
-    
-    if (phoneContainer) {
-      phoneContainer.addEventListener('mousemove', (e: MouseEvent) => {
-        const rect = phoneContainer.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        phoneContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px)`;
-        phoneContainer.style.boxShadow = `0 ${30 + rotateX}px ${60 + Math.abs(rotateX)}px rgba(0,0,0,0.8), 0 0 ${80 + Math.abs(rotateY) * 2}px rgba(255,255,255,0.05)`;
-      });
-      
-      phoneContainer.addEventListener('mouseleave', () => {
-        phoneContainer.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        phoneContainer.style.boxShadow = '0 30px 60px rgba(0,0,0,0.8), 0 0 80px rgba(255,255,255,0.05)';
-      });
-    }
-
     // Notification Badge Animation
     const notificationBadge = document.getElementById('notification-badge') as HTMLElement;
     if (notificationBadge) {
@@ -408,7 +451,6 @@ const baseUrl = import.meta.env.BASE_URL;
       rootMargin: '0px',
       threshold: 0.1
     };
-
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
