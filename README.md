@@ -94,33 +94,61 @@ All CTAs link to: `https://t.me/modern_estate_agency_ukraine`
 
 Update this URL in `src/pages/index.astro` if needed.
 
-## 🚀 Deployment on GitHub Pages
+## 🌐 Domain Configuration
 
-The site is configured to deploy automatically to GitHub Pages.
+The site is configured for the domain: **modern-estate-agency.com.ua**
 
-### Setup Instructions:
+### 📖 Детальна інструкція з налаштування домену
 
-1. **Enable GitHub Pages:**
-   - Go to your repository settings on GitHub: `https://github.com/Dezmoraalb/modern-estate-agency/settings/pages`
-   - Under "Source", select **"GitHub Actions"** (not "Deploy from a branch")
+**👉 Дивіться повну інструкцію:** [`GITHUB_DOMAIN_SETUP.md`](./GITHUB_DOMAIN_SETUP.md)
 
-2. **Push to GitHub:**
-   ```bash
-   git add .
-   git commit -m "Configure GitHub Pages deployment"
-   git push origin main
-   ```
+### Швидкий старт для GitHub Pages:
 
-3. **Automatic Deployment:**
-   - The GitHub Actions workflow will automatically build and deploy your site
-   - Check the "Actions" tab to see the deployment progress
-   - Once complete, your site will be available at:
-     `https://dezmoraalb.github.io/modern-estate-agency`
+1. **Налаштуйте DNS у реєстратора домену:**
+   - Додайте 4 A записи з IP адресами GitHub Pages:
+     - `185.199.108.153`
+     - `185.199.109.153`
+     - `185.199.110.153`
+     - `185.199.111.153`
 
-### Manual Deployment:
+2. **Налаштуйте GitHub Pages:**
+   - Settings → Pages → Custom domain
+   - Введіть: `modern-estate-agency.com.ua`
+   - Увімкніть "Enforce HTTPS"
 
-If you need to deploy manually:
+3. **Зачекайте на поширення DNS** (1-48 годин)
+
+### Для іншого хостингу:
+   - Завантажте вміст папки `dist/` на ваш хостинг
+   - Налаштуйте домен у панелі хостингу
+   - Увімкніть SSL сертифікат (HTTPS)
+
+### Build for Production:
+
 ```bash
+npm install  # Install dependencies including @astrojs/sitemap
 npm run build
-# Then push the dist/ folder to gh-pages branch or use GitHub Actions
 ```
+
+The built files will be in the `dist/` folder, ready to upload to your hosting.
+
+## 🔍 SEO Configuration
+
+The site includes comprehensive SEO optimization:
+
+- ✅ **Meta Tags**: Title, description, keywords
+- ✅ **Open Graph**: For social media sharing (Facebook, LinkedIn)
+- ✅ **Twitter Cards**: Optimized for Twitter sharing
+- ✅ **Structured Data**: JSON-LD schema for search engines
+- ✅ **Canonical URLs**: Prevents duplicate content issues
+- ✅ **Sitemap**: Auto-generated at `/sitemap.xml`
+- ✅ **Robots.txt**: Configured for search engine crawlers
+
+### SEO Features:
+
+- **Structured Data**: RealEstateAgent schema with business information
+- **Keywords**: Optimized for Ukrainian real estate market
+- **Social Sharing**: Open Graph images and descriptions
+- **Mobile-Friendly**: Responsive meta viewport tags
+
+All SEO settings are configured in `src/layouts/Layout.astro`.

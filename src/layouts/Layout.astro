@@ -2,22 +2,85 @@
 export interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonical?: string;
 }
 
 const {
-  title = "Modern Estate Agency | Преміум нерухомість у Києві",
-  description = "Ексклюзивна база преміум будинків та інвестиційної нерухомості в Києві. Приєднайтеся до нашого приватного Telegram каналу для першого доступу до розкішної нерухомості.",
+  title = "Modern Estate Agency | Закритий клуб нерухомості | Преміум нерухомість у Києві",
+  description = "Ексклюзивна база преміум нерухомості Києва та Київської області. Закритий клуб нерухомості з актуальними пропозиціями від власників та забудовників. Без комісії для покупців. Індивідуальний пошук, юридичний супровід, робота з державними програмами.",
+  ogImage = '/assets/modern-estate-agency-logo.jpg',
+  ogType = "website",
+  canonical = Astro.url.pathname,
 } = Astro.props;
+
+const siteUrl = Astro.site || 'https://modern-estate-agency.com.ua';
+const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+const fullCanonical = canonical.startsWith('http') ? canonical : new URL(canonical, siteUrl).href;
+
+const keywords = [
+  "нерухомість Київ",
+  "нерухомість Київська область",
+  "закритий клуб нерухомості",
+  "преміум нерухомість",
+  "купівля нерухомості",
+  "оренда нерухомості",
+  "Modern Estate Agency",
+  "нерухомість Ірпінь",
+  "нерухомість Буча",
+  "ексклюзивна нерухомість",
+  "без комісії",
+  "юридичний супровід",
+  "Єоселя",
+  "Євідновлення"
+].join(', ');
 ---
 
 <!doctype html>
 <html lang="uk" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Modern Estate Agency" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="language" content="Ukrainian" />
+    <meta name="geo.region" content="UA-32" />
+    <meta name="geo.placename" content="Київ" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={fullCanonical} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/assets/modern-estate-agency-logo.jpg" />
+    <link rel="apple-touch-icon" href="/assets/modern-estate-agency-logo.jpg" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Modern Estate Agency - Закритий клуб нерухомості" />
+    <meta property="og:site_name" content="Modern Estate Agency" />
+    <meta property="og:locale" content="uk_UA" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+    <meta name="twitter:image:alt" content="Modern Estate Agency - Закритий клуб нерухомості" />
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,20 +90,57 @@ const {
       rel="stylesheet"
     />
     
-    <title>{title}</title>
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Modern Estate Agency",
+      "description": description,
+      "url": siteUrl,
+      "logo": fullOgImage,
+      "image": fullOgImage,
+      "telephone": "+380970977774",
+      "email": "info@modern-estate-agency.com.ua",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "вулиця Садова 31/32, офіс 32, ТРЦ Garden Plaza, 3 поверх",
+        "addressLocality": "Ірпінь",
+        "addressRegion": "Київська область",
+        "addressCountry": "UA"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Київ"
+        },
+        {
+          "@type": "City",
+          "name": "Ірпінь"
+        },
+        {
+          "@type": "City",
+          "name": "Буча"
+        }
+      ],
+      "sameAs": [
+        "https://t.me/modern_estate_agency_ukraine",
+        "https://www.instagram.com/modern_estate_agency",
+        "https://www.youtube.com/channel/UCkbptC4QGmMU6MGiQPzK3Dg",
+        "https://tiktok.com/@modern_estate",
+        "https://www.facebook.com/profile.php?id=61572273623361"
+      ],
+      "priceRange": "$$",
+      "serviceType": [
+        "Купівля нерухомості",
+        "Оренда нерухомості",
+        "Продаж нерухомості",
+        "Юридичний супровід",
+        "Індивідуальний пошук"
+      ]
+    })} />
     
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
   </head>
   <body class="bg-dark-bg text-white font-body antialiased">
     <slot />
