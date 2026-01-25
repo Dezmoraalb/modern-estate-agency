@@ -1,0 +1,132 @@
+# ⚙️ Налаштування GitHub Pages для Astro
+
+## ⚠️ Важливо: Використовуйте GitHub Actions, а не "Deploy from a branch"
+
+GitHub Pages за замовчуванням намагається використовувати Jekyll для білду, але ваш проект на Astro. Тому **обов'язково** використовуйте **GitHub Actions** для deployment.
+
+---
+
+## ✅ Правильне налаштування (GitHub Actions)
+
+### Крок 1: Налаштуйте GitHub Pages
+
+1. Відкрийте ваш репозиторій на GitHub
+2. Перейдіть до **Settings** → **Pages**
+3. У розділі **Source** виберіть:
+   - **GitHub Actions** (НЕ "Deploy from a branch")
+4. Збережіть зміни
+
+### Крок 2: Перевірте workflow файл
+
+У вашому репозиторії вже є файл `.github/workflows/deploy.yml`, який автоматично:
+- Збирає Astro проект
+- Створює `.nojekyll` файл (щоб вимкнути Jekyll)
+- Деплоїть на GitHub Pages
+
+### Крок 3: Запустіть deployment
+
+1. Зробіть commit та push змін:
+   ```bash
+   git add .
+   git commit -m "Fix GitHub Pages deployment"
+   git push origin main
+   ```
+
+2. Перевірте статус:
+   - Перейдіть до вкладки **Actions** у вашому репозиторії
+   - Перевірте, чи workflow успішно виконався
+
+---
+
+## ❌ Якщо ви використовуєте "Deploy from a branch"
+
+Якщо ви все ж таки хочете використовувати "Deploy from a branch", вам потрібно:
+
+### Варіант 1: Ручний білд та завантаження
+
+1. **Зберіть проект локально:**
+   ```bash
+   npm install
+   npm run build
+   ```
+
+2. **Створіть гілку `gh-pages`:**
+   ```bash
+   git checkout -b gh-pages
+   ```
+
+3. **Скопіюйте вміст папки `dist/` в корінь репозиторію:**
+   ```bash
+   # Видаліть все крім .git
+   rm -rf src public astro.config.mjs package.json node_modules
+   
+   # Скопіюйте вміст dist/
+   cp -r dist/* .
+   ```
+
+4. **Створіть `.nojekyll` файл:**
+   ```bash
+   touch .nojekyll
+   ```
+
+5. **Commit та push:**
+   ```bash
+   git add .
+   git commit -m "Deploy to GitHub Pages"
+   git push origin gh-pages
+   ```
+
+6. **Налаштуйте GitHub Pages:**
+   - Settings → Pages → Source
+   - Виберіть branch: `gh-pages`
+   - Folder: `/ (root)`
+
+### Варіант 2: Використайте GitHub Actions (рекомендовано)
+
+Просто перемкніть Source на **GitHub Actions** у налаштуваннях Pages.
+
+---
+
+## 🔧 Вирішення проблем
+
+### Помилка: "Invalid YAML front matter"
+
+**Причина:** GitHub Pages намагається використовувати Jekyll для обробки `.astro` файлів.
+
+**Рішення:**
+1. Переконайтеся, що ви використовуєте **GitHub Actions**, а не "Deploy from a branch"
+2. Переконайтеся, що файл `.nojekyll` створюється під час білду
+3. Перевірте, що workflow файл правильно налаштований
+
+### Сайт не оновлюється
+
+1. Перевірте вкладку **Actions** - чи успішно виконався workflow
+2. Перевірте налаштування Pages - чи вибрано правильний source
+3. Зачекайте 1-2 хвилини після deployment
+
+### 404 помилка
+
+1. Перевірте, що `base: '/'` в `astro.config.mjs` (не `/modern-estate-agency/`)
+2. Перевірте, що `site: 'https://modern-estate-agency.com.ua'` правильно налаштований
+3. Переконайтеся, що custom domain правильно налаштований
+
+---
+
+## 📝 Чеклист
+
+- [ ] Source в GitHub Pages встановлено на **GitHub Actions**
+- [ ] Workflow файл `.github/workflows/deploy.yml` існує
+- [ ] Файл `.nojekyll` створюється під час білду
+- [ ] Workflow успішно виконується (перевірте Actions)
+- [ ] Сайт доступний за адресою вашого домену
+
+---
+
+## 💡 Рекомендації
+
+**Найкращий варіант:** Використовуйте **GitHub Actions** - це автоматично, надійно і правильно працює з Astro.
+
+**Не використовуйте:** "Deploy from a branch" для Astro проектів - це викликає проблеми з Jekyll.
+
+
+
