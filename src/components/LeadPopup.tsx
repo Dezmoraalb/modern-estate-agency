@@ -1,174 +1,74 @@
 import React, { useState, useEffect } from 'react';
 
 const LeadPopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    // Check if already closed in this session
-    const isClosed = sessionStorage.getItem('leadPopupClosed');
-    if (isClosed) return;
+    useEffect(() => {
+        // Check if valid session
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 10000); // 10 seconds
 
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 7000); // 7 seconds
+        return () => clearTimeout(timer);
+    }, []);
 
-    return () => clearTimeout(timer);
-  }, []);
+    if (!isVisible) return null;
 
-  const handleClose = () => {
-    setIsOpen(false);
-    sessionStorage.setItem('leadPopupClosed', 'true');
-  };
+    return (
+        <div className="fixed bottom-6 left-6 z-[100] flex flex-col items-start gap-4">
+            {/* Expanded Message Box */}
+            {isExpanded && (
+                <div className="bg-[#1a1a1a] border border-white/10 rounded-lg p-6 shadow-2xl mb-2 w-72 animate-in fade-in slide-in-from-bottom-4 duration-300 relative">
+                    <button
+                        onClick={() => setIsExpanded(false)}
+                        className="absolute top-2 right-2 text-white/30 hover:text-white transition-colors"
+                    >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+                    <h3 className="text-white font-bold text-lg mb-2 leading-tight">
+                        Не знайшли те, що шукали?
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+                        Наш експерт допоможе підібрати ідеальний варіант за 5 хвилин!
+                    </p>
 
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name');
-    const phone = formData.get('phone');
-    const type = formData.get('type');
-    const location = formData.get('location');
-
-    const message = `
-🔥 *Нова заявка з сайту (Popup)*
-
-👤 *Ім'я:* ${name}
-📞 *Телефон:* ${phone}
-🏠 *Тип:* ${type}
-📍 *Локація:* ${location}
-    `.trim();
-
-    try {
-      const response = await fetch(`https://api.telegram.org/bot8499597398:AAFRTprLXuEEQH74o-7XdhhM2oUTMyeHWLc/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: '-5248339490',
-          text: message,
-          parse_mode: 'Markdown',
-        }),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setTimeout(() => {
-          handleClose();
-        }, 3000);
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
-        onClick={handleClose}
-      />
-
-      {/* Modal */}
-      <div className="relative w-full max-w-md bg-[#1a1a1a] border border-white/10 rounded-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-        {/* Glow effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#bf953f] to-transparent opacity-70" />
-
-        <button 
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
-        >
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="p-8">
-          {isSubmitted ? (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">Дякуємо!</h3>
-              <p className="text-gray-400">Ми зв'яжемося з Вами найближчим часом.</p>
-            </div>
-          ) : (
-            <>
-              <div className="mb-6 text-center">
-                <h3 className="text-2xl font-display font-bold text-white mb-2">
-                  Підберемо нерухомість?
-                </h3>
-                <p className="text-gray-400 text-sm">
-                  Залиште контакти і ми запропонуємо варіанти під Ваш запит
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <input
-                    required
-                    type="text"
-                    name="name"
-                    placeholder="Ваше ім'я"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded focus:border-[#bf953f] focus:outline-none text-white placeholder-white/30 transition-colors"
-                  />
+                    <a
+                        href="tel:0970977774"
+                        className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-bold uppercase tracking-wider text-xs rounded hover:bg-gray-200 transition-colors"
+                    >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        Зателефонувати
+                    </a>
                 </div>
-                <div>
-                  <input
-                    required
-                    type="tel"
-                    name="phone"
-                    placeholder="Ваш телефон"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded focus:border-[#bf953f] focus:outline-none text-white placeholder-white/30 transition-colors"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <select 
-                    name="type"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded focus:border-[#bf953f] focus:outline-none text-white transition-colors appearance-none cursor-pointer"
-                  >
-                    <option value="Квартира" className="bg-[#1a1a1a]">Квартира</option>
-                    <option value="Будинок" className="bg-[#1a1a1a]">Будинок</option>
-                    <option value="Комерція" className="bg-[#1a1a1a]">Комерція</option>
-                    <option value="Земля" className="bg-[#1a1a1a]">Земля</option>
-                  </select>
+            )}
 
-                  <select 
-                    name="location"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded focus:border-[#bf953f] focus:outline-none text-white transition-colors appearance-none cursor-pointer"
-                  >
-                    <option value="Ірпінь" className="bg-[#1a1a1a]">Ірпінь</option>
-                    <option value="Буча" className="bg-[#1a1a1a]">Буча</option>
-                    <option value="Київ" className="bg-[#1a1a1a]">Київ</option>
-                    <option value="Область" className="bg-[#1a1a1a]">Область</option>
-                  </select>
-                </div>
+            {/* Pulsing Trigger Button */}
+            <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="group relative flex items-center justify-center w-14 h-14 bg-white rounded-full text-black shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform duration-300"
+            >
+                {!isExpanded && (
+                    <span className="absolute inset-0 rounded-full bg-white opacity-40 animate-ping"></span>
+                )}
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-4 bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] rounded font-bold text-white uppercase tracking-widest hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-                >
-                  {loading ? 'Надсилання...' : 'Отримати пропозиції'}
-                </button>
-              </form>
-            </>
-          )}
+                {isExpanded ? (
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                ) : (
+                    <svg className="w-6 h-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                )}
+            </button>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default LeadPopup;
