@@ -1,68 +1,81 @@
 ---
+import { contacts, socials } from '../data/site';
+
 export interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   ogType?: string;
   canonical?: string;
+  faq?: { q: string; a: string }[];
 }
 
 const {
-  title = "Modern Estate Agency | Закритий клуб нерухомості | Преміум нерухомість у Києві",
-  description = "Ексклюзивна база преміум нерухомості Києва та Київської області. Закритий клуб нерухомості з актуальними пропозиціями від власників та забудовників. Без комісії для покупців. Індивідуальний пошук, юридичний супровід, робота з державними програмами.",
-  ogImage = '/assets/modern-estate-agency-logo.jpg',
-  ogType = "website",
+  title = 'Modern Estate Agency — нерухомість в Ірпені, Бучі та Києві без комісії',
+  description = 'Будинки, таунхауси, квартири та комерційна нерухомість в Ірпені, Бучі, Гостомелі та Києві. Без комісії для покупців, напряму від власників і забудовників. єОселя, єВідновлення, розтермінування. Підбір за анкетою за 1 хвилину.',
+  ogImage = '/og.jpg',
+  ogType = 'website',
   canonical = Astro.url.pathname,
+  faq = [],
 } = Astro.props;
 
 const siteUrl = Astro.site || 'https://modern-estate-agency.com.ua';
 const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 const fullCanonical = canonical.startsWith('http') ? canonical : new URL(canonical, siteUrl).href;
 
-const keywords = [
-  "нерухомість Київ",
-  "нерухомість Київська область",
-  "закритий клуб нерухомості",
-  "преміум нерухомість",
-  "купівля нерухомості",
-  "оренда нерухомості",
-  "Modern Estate Agency",
-  "нерухомість Ірпінь",
-  "нерухомість Буча",
-  "ексклюзивна нерухомість",
-  "без комісії",
-  "юридичний супровід",
-  "Єоселя",
-  "Євідновлення"
-].join(', ');
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateAgent',
+    name: 'Modern Estate Agency',
+    description,
+    url: siteUrl.toString(),
+    logo: new URL('/assets/modern-estate-agency-logo.jpg', siteUrl).href,
+    image: fullOgImage,
+    telephone: '+380970977774',
+    email: contacts.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'вул. Садова 31, ТРЦ Garden Plaza, 4 поверх, офіс 39/11',
+      addressLocality: 'Ірпінь',
+      addressRegion: 'Київська область',
+      addressCountry: 'UA',
+    },
+    areaServed: ['Ірпінь', 'Буча', 'Гостомель', 'Ворзель', 'Київ'].map((name) => ({ '@type': 'City', name })),
+    sameAs: [...new Set(socials.map((s) => s.href))],
+    priceRange: '$$',
+    knowsAbout: ['купівля нерухомості', 'продаж нерухомості', 'оренда', 'єОселя', 'єВідновлення', 'таунхауси', 'котеджні містечка'],
+  },
+  ...(faq.length
+    ? [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+        },
+      ]
+    : []),
+];
 ---
 
 <!doctype html>
-<html lang="uk" class="scroll-smooth">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050505" />
     <meta name="generator" content={Astro.generator} />
-    
-    <!-- Primary Meta Tags -->
+
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
-    <meta name="author" content="Modern Estate Agency" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="language" content="Ukrainian" />
     <meta name="geo.region" content="UA-32" />
-    <meta name="geo.placename" content="Київ" />
-    
-    <!-- Canonical URL -->
+    <meta name="geo.placename" content="Ірпінь" />
     <link rel="canonical" href={fullCanonical} />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="/assets/modern-estate-agency-logo.jpg" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/assets/modern-estate-agency-logo.jpg" />
-    
-    <!-- Open Graph / Facebook -->
+
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={fullCanonical} />
     <meta property="og:title" content={title} />
@@ -70,170 +83,222 @@ const keywords = [
     <meta property="og:image" content={fullOgImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Modern Estate Agency - Закритий клуб нерухомості" />
     <meta property="og:site_name" content="Modern Estate Agency" />
     <meta property="og:locale" content="uk_UA" />
-    
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={fullCanonical} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImage} />
-    <meta name="twitter:image:alt" content="Modern Estate Agency - Закритий клуб нерухомості" />
-    
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "RealEstateAgent",
-      "name": "Modern Estate Agency",
-      "description": description,
-      "url": siteUrl,
-      "logo": fullOgImage,
-      "image": fullOgImage,
-      "telephone": "+380970977774",
-      "email": "info@modern-estate-agency.com.ua",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "вулиця Садова 31, офіс 39/11, ТРЦ Garden Plaza, 4 поверх",
-        "addressLocality": "Ірпінь",
-        "addressRegion": "Київська область",
-        "addressCountry": "UA"
-      },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Київ"
-        },
-        {
-          "@type": "City",
-          "name": "Ірпінь"
-        },
-        {
-          "@type": "City",
-          "name": "Буча"
-        }
-      ],
-      "sameAs": [
-        "https://t.me/modern_estate_agency_ukraine",
-        "https://www.instagram.com/modern_estate_agency",
-        "https://www.youtube.com/channel/UCkbptC4QGmMU6MGiQPzK3Dg",
-        "https://tiktok.com/@modern_estate",
-        "https://www.facebook.com/profile.php?id=61572273623361"
-      ],
-      "priceRange": "$$",
-      "serviceType": [
-        "Купівля нерухомості",
-        "Оренда нерухомості",
-        "Продаж нерухомості",
-        "Юридичний супровід",
-        "Індивідуальний пошук"
-      ]
-    })} />
-    
-    <!-- Lenis Smooth Scroll -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <link rel="preload" as="image" href="/assets/hero-poster.webp" type="image/webp" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
   </head>
   <body class="bg-dark-bg text-white font-body antialiased">
     <slot />
-    
-    <script>
-      // @ts-ignore - Lenis loaded from CDN
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => 1 - Math.pow(1 - t, 4), // easeOutQuart
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-      });
-      
-      function raf(time) {
-        lenis.raf(time);
+
+    <script is:inline>
+      // Плавний скрол; window.__lenis використовує анкета для scrollTo
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.Lenis || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var lenis = new Lenis({ duration: 1.15, easing: function (t) { return 1 - Math.pow(1 - t, 4); }, smoothWheel: true });
+        window.__lenis = lenis;
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
-      }
-      
-      requestAnimationFrame(raf);
+      });
     </script>
   </body>
 </html>
 
 <style is:global>
-  * {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
-  html {
-    scroll-behavior: smooth;
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
   }
-  
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
   body {
     overflow-x: hidden;
-    background: #0a0a0a;
+    background: #050505;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Rich Dark Background with Radial Gradient Mesh */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(15, 15, 25, 0.8) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(10, 15, 20, 0.6) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(5, 10, 15, 0.4) 0%, transparent 50%),
-      #0a0a0a;
-    pointer-events: none;
-  }
-
-  /* Noise Texture Overlay */
+  /* шум поверх усього — «дорога» фактура, як і було */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 1;
-    opacity: 0.04;
+    opacity: 0.035;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjYSkiIG9wYWNpdHk9Ii41Ii8+PC9zdmc+');
     background-size: 200px 200px;
     pointer-events: none;
     mix-blend-mode: overlay;
   }
 
-  /* Premium Typography with clamp() */
-  h1, .font-display {
-    font-size: clamp(2.5rem, 8vw, 9rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 0.9;
-  }
-
-  h2, h2.font-display {
-    font-size: clamp(2rem, 6vw, 6rem);
+  h1 {
+    font-size: clamp(3rem, 9vw, 8.5rem);
     font-weight: 600;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    letter-spacing: -0.025em;
+    line-height: 0.92;
   }
-
+  h2 {
+    font-size: clamp(2.25rem, 5.2vw, 4.75rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.04;
+  }
   h3 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
     font-weight: 600;
     line-height: 1.2;
   }
 
-  /* Smooth transitions */
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  ::selection {
+    background: rgba(225, 205, 166, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #e1cda6;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .btn-gold {
+    color: #0a0a0a;
+    background: linear-gradient(110deg, #c9a96a 0%, #ecdcb8 40%, #f8efd9 50%, #ecdcb8 60%, #c9a96a 100%);
+    background-size: 220% 100%;
+    background-position: 100% 0;
+    transition: background-position 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s ease, box-shadow 0.4s ease;
+  }
+  .btn-gold:hover {
+    background-position: 0% 0;
+    box-shadow: 0 10px 40px -10px rgba(225, 205, 166, 0.55);
+  }
+  .btn-gold:active {
+    transform: scale(0.98);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(225, 205, 166, 0.6);
+    background: rgba(225, 205, 166, 0.06);
+    color: #e1cda6;
+  }
+
+  .field {
+    width: 100%;
+    height: 3.5rem;
+    padding: 0 1.1rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 16px; /* без автозуму на iOS */
+    transition: border-color 0.2s, background 0.2s;
+  }
+  textarea.field {
+    height: auto;
+    padding: 0.9rem 1.1rem;
+  }
+  .field::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+  .field:focus {
+    outline: none;
+    border-color: rgba(225, 205, 166, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .field-error {
+    border-color: rgba(253, 164, 175, 0.6);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(110deg, #e1cda6 40%, #ffffff 50%, #e1cda6 60%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer-text 7s linear infinite;
+  }
+  @keyframes shimmer-text {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #e1cda6;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e1cda6);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .text-shimmer {
+      animation: none;
+    }
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>
-

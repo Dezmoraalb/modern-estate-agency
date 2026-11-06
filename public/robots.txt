@@ -1,13 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://modern-estate-agency.com.ua/sitemap.xml
-
-# Disallow admin or private areas if any
-# Disallow: /admin/
-# Disallow: /private/
-
-
-
-
+Sitemap: https://modern-estate-agency.com.ua/sitemap-index.xml
