@@ -9,7 +9,7 @@
   // Роут modern-estate-agency.com.ua/api/* не ставимо: у API-токена нема права Workers Routes на зону.
   // Фронт ходить на workers.dev (див. PUBLIC_LEAD_ENDPOINT у .env / src/data/site.ts).
   "vars": {
-    "ALLOWED_ORIGINS": "https://modern-estate-agency.com.ua,https://www.modern-estate-agency.com.ua,http://localhost:4321,http://127.0.0.1:4321",
+    "ALLOWED_ORIGINS": "https://modern-estate-agency.com.ua,https://www.modern-estate-agency.com.ua,http://localhost:4321,http://127.0.0.1:4321,https://modern-estate-preview.parleerio.workers.dev",
     "ALLOWED_ORIGIN_SUFFIX": ".modern-estate-agency.pages.dev"
   },
   "observability": { "enabled": true }
