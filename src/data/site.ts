@@ -10,9 +10,9 @@ export const contacts = {
   whatsapp: 'https://wa.me/380970977774',
   viber: 'viber://chat?number=%2B380970977774',
   email: 'agency.modern.estate@gmail.com',
-  address: 'Ірпінь, вул. Садова 31, ТРЦ «Garden Plaza», 4 поверх, офіс 39/11',
-  addressShort: 'Ірпінь, ТРЦ «Garden Plaza»',
-  maps: 'https://www.google.com/maps/search/?api=1&query=%D0%86%D1%80%D0%BF%D1%96%D0%BD%D1%8C+%D0%A1%D0%B0%D0%B4%D0%BE%D0%B2%D0%B0+31+Garden+Plaza',
+  address: 'Ірпінь, вул. Мечникова, 32',
+  addressShort: 'Ірпінь, вул. Мечникова, 32',
+  maps: 'https://maps.app.goo.gl/EX3TZrJv5cTuiqsr6',
 };
 
 export const socials = [
@@ -23,13 +23,6 @@ export const socials = [
     href: 'https://www.instagram.com/modern_estate_agency',
     note: '17,4 тис. підписників · нові відеоогляди щотижня',
     featured: true,
-  },
-  {
-    id: 'instagram',
-    name: 'Ольга Меньківська',
-    handle: '@olga_menkivska',
-    href: 'https://www.instagram.com/olga_menkivska',
-    note: 'Особиста сторінка',
   },
   { id: 'tiktok', name: 'TikTok', handle: '@modern_estate', href: 'https://tiktok.com/@modern_estate', note: 'Короткі огляди об’єктів' },
   {
@@ -135,12 +128,12 @@ export const quizSteps: QuizStep[] = [
     hint: 'можна обрати кілька',
     multi: true,
     options: () => [
+      { value: 'Київ' },
       { value: 'Ірпінь' },
       { value: 'Буча' },
       { value: 'Гостомель' },
       { value: 'Ворзель' },
-      { value: 'Київ' },
-      { value: 'Інше' },
+      { value: 'Інше в області' },
     ],
   },
   {

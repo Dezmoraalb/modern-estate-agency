@@ -11,8 +11,8 @@ export interface Props {
 }
 
 const {
-  title = 'Modern Estate Agency — нерухомість в Ірпені, Бучі та Києві без комісії',
-  description = 'Будинки, таунхауси, квартири та комерційна нерухомість в Ірпені, Бучі, Гостомелі та Києві. Без комісії для покупців, напряму від власників і забудовників. єОселя, єВідновлення, розтермінування. Підбір за анкетою за 1 хвилину.',
+  title = 'Modern Estate Agency — нерухомість у Києві та Київській області без комісії',
+  description = 'Будинки, таунхауси, квартири та комерційна нерухомість у Києві та Київській області: Ірпінь, Буча, Гостомель, Ворзель. Без комісії для покупців, напряму від власників і забудовників. єОселя, єВідновлення, розтермінування. Підбір за анкетою за 1 хвилину.',
   ogImage = '/og.jpg',
   ogType = 'website',
   canonical = Astro.url.pathname,
@@ -36,12 +36,16 @@ const ld = [
     email: contacts.email,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'вул. Садова 31, ТРЦ Garden Plaza, 4 поверх, офіс 39/11',
+      streetAddress: 'вул. Мечникова, 32',
       addressLocality: 'Ірпінь',
       addressRegion: 'Київська область',
       addressCountry: 'UA',
     },
-    areaServed: ['Ірпінь', 'Буча', 'Гостомель', 'Ворзель', 'Київ'].map((name) => ({ '@type': 'City', name })),
+    areaServed: [
+      { '@type': 'City', name: 'Київ' },
+      { '@type': 'AdministrativeArea', name: 'Київська область' },
+    ],
+    hasMap: contacts.maps,
     sameAs: [...new Set(socials.map((s) => s.href))],
     priceRange: '$$',
     knowsAbout: ['купівля нерухомості', 'продаж нерухомості', 'оренда', 'єОселя', 'єВідновлення', 'таунхауси', 'котеджні містечка'],
