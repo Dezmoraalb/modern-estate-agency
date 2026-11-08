@@ -1,0 +1,27 @@
+---
+// Векторна версія логотипа (золота рамка + MODERN ESTATE / AGENCY) — чітка на будь-якому фоні,
+// на відміну від jpg з чорним квадратом.
+interface Props {
+  class?: string;
+  id?: string;
+}
+const { class: cls = 'h-12 w-auto', id = 'lg' } = Astro.props;
+---
+
+<svg viewBox="0 0 300 260" class={cls} role="img" aria-label="Modern Estate Agency">
+  <defs>
+    <linearGradient id={`${id}-t`} x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="0.55" stop-color="#fbf3d6" />
+      <stop offset="1" stop-color="#e2c56e" />
+    </linearGradient>
+    <linearGradient id={`${id}-f`} x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e9cf7c" />
+      <stop offset="1" stop-color="#c9a24a" />
+    </linearGradient>
+  </defs>
+  <path d="M70 158V8h220v250H150" fill="none" stroke={`url(#${id}-f)`} stroke-width="4" />
+  <text x="272" y="76" text-anchor="end" fill={`url(#${id}-t)`} font-family="Manrope, sans-serif" font-weight="400" font-size="40" letter-spacing="1">MODERN</text>
+  <text x="272" y="124" text-anchor="end" fill={`url(#${id}-t)`} font-family="Manrope, sans-serif" font-weight="400" font-size="40" letter-spacing="1">ESTATE</text>
+  <text x="4" y="210" fill={`url(#${id}-t)`} font-family="Manrope, sans-serif" font-weight="400" font-size="44" letter-spacing="7">AGENCY</text>
+</svg>

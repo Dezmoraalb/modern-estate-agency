@@ -6,6 +6,8 @@ export default {
         colors: {
           'dark-bg': '#000000',
           'dark-card': '#0a0a0a',
+          champagne: '#e1cda6',
+          gold: '#c9a96a',
         },
         fontFamily: {
           display: ['Playfair Display', 'serif'],
