@@ -586,14 +586,24 @@ const faq = [
               ))
             }
           </div>
-          <a href="https://rieltor.ua" id="rieltor_ua_440182" target="_blank" rel="noopener noreferrer" aria-label="Rieltor.ua Partner" class="inline-block">
-            <script is:inline async src="https://rieltor.ua/js/level_status.js?id=440182"></script>
-          </a>
+          {/* скрипт не всередині <a>: інакше Astro-компілятор «перевідкриває» <a> далі по футеру (дубль id, копірайт стає лінком) */}
+          <a href="https://rieltor.ua" id="rieltor_ua_440182" target="_blank" rel="noopener noreferrer" aria-label="Rieltor.ua Partner" class="inline-block"></a>
+          <script is:inline async src="https://rieltor.ua/js/level_status.js?id=440182"></script>
         </div>
       </div>
-      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/35 uppercase tracking-[0.18em]">
-        <span>Modern Estate Agency © {new Date().getFullYear()}</span>
-        <a href="#top" class="hover:text-champagne transition-colors">Нагору ↑</a>
+      <div class="pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 items-center justify-items-center gap-6 md:gap-4">
+        <span class="md:justify-self-start text-xs text-white/35 uppercase tracking-[0.18em]">Modern Estate Agency © {new Date().getFullYear()}</span>
+        <a
+          href="https://webengine.studio"
+          target="_blank"
+          rel="noopener"
+          title="WebEngine — розробка сайтів, Київ"
+          class="dev-credit group inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] py-1.5 pl-1.5 pr-4 text-[13px] text-white/40 transition-colors duration-300 hover:border-white/20 hover:bg-white/[0.04]"
+        >
+          <img src={`${baseUrl}assets/webengine-mark.webp`} width="24" height="24" alt="" aria-hidden="true" loading="lazy" decoding="async" class="dev-credit-mark w-6 h-6 shrink-0 select-none" />
+          <span>Розроблено в <span class="dev-credit-name relative text-white/80 transition-colors duration-300 group-hover:text-white">webengine<span class="text-white/40">.studio</span></span></span>
+        </a>
+        <a href="#top" class="md:justify-self-end text-xs text-white/35 uppercase tracking-[0.18em] hover:text-champagne transition-colors">Нагору ↑</a>
       </div>
     </div>
   </footer>
@@ -730,6 +740,37 @@ const faq = [
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* Підпис студії: на десктопі сфера сіра і оживає на ховер, на тачі — одразу кольорова */
+  .dev-credit-mark {
+    transition: filter 0.5s ease, opacity 0.5s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .dev-credit-name::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: linear-gradient(90deg, #0097b2, #7ed957);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (hover: hover) {
+    .dev-credit-mark {
+      filter: grayscale(1);
+      opacity: 0.55;
+    }
+    .dev-credit:hover .dev-credit-mark {
+      filter: none;
+      opacity: 1;
+      transform: rotate(180deg);
+    }
+    .dev-credit:hover .dev-credit-name::after {
+      transform: scaleX(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-in {
       opacity: 1;
@@ -738,6 +779,9 @@ const faq = [
     }
     .ticker {
       animation: none;
+    }
+    .dev-credit:hover .dev-credit-mark {
+      transform: none;
     }
   }
 </style>
