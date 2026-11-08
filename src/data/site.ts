@@ -116,6 +116,7 @@ export const quizSteps: QuizStep[] = [
     options: () => [
       { value: 'Квартира', icon: 'building' },
       { value: 'Будинок', icon: 'house' },
+      { value: 'Дуплекс', icon: 'duplex' },
       { value: 'Таунхаус', icon: 'townhouse' },
       { value: 'Комерційна', icon: 'store' },
       { value: 'Ділянка', icon: 'land' },

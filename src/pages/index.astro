@@ -12,10 +12,11 @@ const baseUrl = import.meta.env.BASE_URL;
 const pickers = [
   { label: 'Квартира', icon: 'building', goal: 'Купити', type: 'Квартира' },
   { label: 'Будинок', icon: 'house', goal: 'Купити', type: 'Будинок' },
+  { label: 'Дуплекс', icon: 'duplex', goal: 'Купити', type: 'Дуплекс' },
   { label: 'Таунхаус', icon: 'townhouse', goal: 'Купити', type: 'Таунхаус' },
   { label: 'Комерція', icon: 'store', goal: 'Купити', type: 'Комерційна' },
   { label: 'Ділянка', icon: 'land', goal: 'Купити', type: 'Ділянка' },
-  { label: 'Продати свою', icon: 'tag', goal: 'Продати' },
+  { label: 'Продати свою нерухомість', icon: 'tag', goal: 'Продати', wide: true },
 ];
 
 const ticker = [
@@ -124,7 +125,7 @@ const faq = [
           </h1>
 
           <p class="hero-in max-w-xl text-white/80 text-[17px] md:text-xl font-light leading-relaxed pl-4 border-l border-champagne/50" style="--d:0.6s">
-            Будинки, таунхауси, квартири та комерція. Пройдіть коротку анкету — менеджер підбере актуальні варіанти напряму від власників і забудовників.
+            Будинки, дуплекси, таунхауси, квартири та комерція. Пройдіть коротку анкету — менеджер підбере актуальні варіанти напряму від власників і забудовників.
           </p>
 
           <div class="hero-in hidden lg:flex items-center gap-6 mt-10 text-sm text-white/55" style="--d:0.75s">
@@ -149,7 +150,9 @@ const faq = [
                     data-quiz-goal={p.goal}
                     data-quiz-type={p.type}
                     data-quiz-source={`Хіро: «${p.label}»`}
-                    class={`group flex flex-col items-start justify-between gap-3 md:gap-5 rounded-2xl border px-3 py-3 md:px-4 md:py-4 text-left transition-all duration-300 active:scale-[0.97] ${
+                    class={`group flex rounded-2xl border px-3 py-3 md:px-4 md:py-4 text-left transition-all duration-300 active:scale-[0.97] ${
+                      p.wide ? 'col-span-3 flex-row items-center gap-3' : 'flex-col items-start justify-between gap-3 md:gap-5'
+                    } ${
                       p.goal === 'Продати'
                         ? 'border-champagne/30 bg-champagne/[0.07] hover:bg-champagne/[0.14] hover:border-champagne/70'
                         : 'border-white/10 bg-white/[0.04] hover:bg-white/[0.09] hover:border-white/30'
@@ -158,7 +161,10 @@ const faq = [
                     <Icon name={p.icon} className={`w-6 h-6 transition-colors ${p.goal === 'Продати' ? 'text-champagne' : 'text-white/55 group-hover:text-champagne'}`} />
                     <span class="w-full flex items-center justify-between text-[13px] md:text-[15px] font-medium text-white/90 leading-tight">
                       {p.label}
-                      <Icon name="arrow" className="w-4 h-4 opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0 transition-all hidden md:block" />
+                      <Icon
+                        name="arrow"
+                        className={`w-4 h-4 transition-all ${p.wide ? 'text-champagne opacity-80' : 'opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0 hidden md:block'}`}
+                      />
                     </span>
                   </button>
                 ))
@@ -278,12 +284,20 @@ const faq = [
             <h2 class="font-display text-white mt-5 mb-8">
               Сучасна агенція нерухомості <span class="italic font-normal text-champagne">Києва та області</span>
             </h2>
-            <p class="text-white/65 text-lg font-light leading-relaxed mb-5">
-              Modern Estate Agency — команда рієлторів з офісом в Ірпені. Продаємо та підбираємо будинки, таунхауси, квартири й комерційну нерухомість у Києві та Київській області.
-            </p>
-            <p class="text-white/65 text-lg font-light leading-relaxed mb-9">
-              Широка база об’єктів Києва та Київської області, ексклюзивні пропозиції від забудовників і власників. Лише перевірені об’єкти з актуальними цінами, онлайн та офлайн перегляди. Ми цінуємо ваш час і знайдемо найкращий варіант — безпечно та комфортно.
-            </p>
+            <div class="space-y-4 text-white/65 text-[17px] md:text-lg font-light leading-relaxed mb-9">
+              <p>
+                Modern Estate Agency — сучасна агенція нерухомості з офісом в Ірпені, що спеціалізується на продажу, купівлі та підборі житлової й комерційної нерухомості в Києві та Київській області.
+              </p>
+              <p>Ми об’єднуємо команду досвідчених фахівців, глибоке знання ринку та індивідуальний підхід до кожного клієнта.</p>
+              <p>
+                У нашому портфелі — приватні будинки, котеджі, дуплекси, таунхауси, квартири та комерційні об’єкти. Працюємо з широкою базою актуальних пропозицій, ексклюзивними об’єктами від власників і забудовників.
+                <a href="#the-yard" class="text-champagne underline decoration-champagne/40 underline-offset-4 hover:decoration-champagne transition-colors">Також будуємо самостійно!</a>
+              </p>
+              <p>
+                Ми допомагаємо знайти оптимальне рішення, перевіряємо об’єкти, організовуємо онлайн- та офлайн-перегляди й забезпечуємо професійний супровід на кожному етапі угоди.
+              </p>
+              <p class="font-display italic text-champagne text-xl md:text-2xl leading-snug pt-2">Modern Estate Agency — ваш надійний партнер у світі нерухомості.</p>
+            </div>
             <a href={contacts.maps} target="_blank" rel="noopener" class="group inline-flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-champagne/40 transition-colors max-w-md">
               <span class="w-11 h-11 shrink-0 rounded-full border border-champagne/40 flex items-center justify-center text-champagne"><Icon name="pin" className="w-5 h-5" /></span>
               <span>
@@ -353,7 +367,7 @@ const faq = [
               <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400/60 animate-ping"></span>
               <span class="relative inline-flex rounded-full w-2.5 h-2.5 bg-emerald-400"></span>
             </span>
-            <span class="text-sm text-white/85">Будівництво триває · фундамент завершено</span>
+            <span class="text-sm text-white/85">Йде активне будівництво</span>
           </div>
         </div>
 
@@ -548,7 +562,7 @@ const faq = [
         <div class="md:col-span-4">
           <Logo class="h-16 w-auto mb-6" id="footer-logo" />
           <p class="text-white/45 text-sm font-light leading-relaxed max-w-xs">
-            Сучасна агенція нерухомості. Будинки, квартири, таунхауси та комерція в Києві та Київській області.
+            Сучасна агенція нерухомості. Будинки, дуплекси, квартири, таунхауси та комерція в Києві та Київській області.
           </p>
         </div>
         <div class="md:col-span-4">
